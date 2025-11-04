@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import "../assets/food-background.jpg";
 export default function Home({ user }) {
   return (
     <div
