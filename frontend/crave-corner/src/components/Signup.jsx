@@ -16,15 +16,14 @@ const Signup = () => {
     }
 
     try {
-      // ✅ Use environment variable or fallback to localhost
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL || "https://msd-full.onrender.com/"}/api/signup`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
-        }
-      );
+      // ✅ Use environment variable or fallback to your Render backend URL
+      const apiUrl = process.env.REACT_APP_API_URL || "https://msd-full.onrender.com";
+
+      const response = await fetch(`${apiUrl}/api/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
       const data = await response.json();
 
