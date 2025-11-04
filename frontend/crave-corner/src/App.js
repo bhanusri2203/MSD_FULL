@@ -15,7 +15,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [cartItems, setCartItems] = useState([]); // ✅ Shared cart state
 
-  // ✅ Keep login state updated across tabs
+  // ✅ Keep login state updated
   useEffect(() => {
     const handleStorageChange = () => {
       setIsLoggedIn(!!localStorage.getItem("token"));
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <Router>
-      {/* ✅ Navbar visible on all pages, updates when logged in/out */}
+      {/* ✅ Navbar with logout control */}
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <Routes>
@@ -51,7 +51,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/menu"
           element={
@@ -60,7 +59,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/cart"
           element={
@@ -69,7 +67,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/order-summary"
           element={
@@ -78,7 +75,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/help"
           element={
@@ -87,7 +83,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/about"
           element={
