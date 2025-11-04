@@ -15,7 +15,7 @@ const Menu = ({ cartItems, setCartItems }) => {
 
   const menuItems = {
     Soups: [
-      { id: 101, name: "Tomato Soup", price: 120, image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.indianhealthyrecipes.com%2Ftomato-soup-recipe%2F&psig=AOvVaw1_NPxVmLvpjYhKdTANgx61&ust=1762352567616000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNjH6szZ2JADFQAAAAAdAAAAABAE" },
+      { id: 101, name: "Tomato Soup", price: 120, image: "https://images.unsplash.com/photo-1645126352390-770b4872d4a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
       { id: 102, name: "Sweet Corn Soup", price: 130, image: "https://www.cookwithmanali.com/wp-content/uploads/2021/01/Sweet-Corn-Soup.jpg" },
       { id: 103, name: "Hot and Sour Soup", price: 140, image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2020/10/hot-and-sour-soup.jpg" },
       { id: 104, name: "Manchow Soup", price: 135, image: "https://www.cookwithkushi.com/wp-content/uploads/2021/12/best_vegetable_manchow_soup_recipe.jpg" },
