@@ -26,7 +26,8 @@ const OrderSummary = () => {
           return;
         }
 
-        const response = await fetch("https://msd-full.onrender.com/api/order", {
+        // ✅ Corrected backend URL
+        const response = await fetch("https://msd-full-stack.onrender.com/api/order", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
