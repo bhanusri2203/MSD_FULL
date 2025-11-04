@@ -11,7 +11,7 @@ export default function Home({ user }) {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundImage: "url('./assets/food-background.jpg')",
+        backgroundImage: "url('../assets/food-background.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "#0f0f0fff",
