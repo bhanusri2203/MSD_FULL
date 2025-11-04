@@ -13,7 +13,7 @@ const Login = ({ setIsLoggedIn }) => {
     try {
       // ✅ Use environment variable or fallback to localhost
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/login`,
+        `${process.env.REACT_APP_API_URL || "https://msd-full.onrender.com/"}/api/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
