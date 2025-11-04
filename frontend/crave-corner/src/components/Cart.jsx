@@ -2,18 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 
-const Cart = ({ cartItems, setCartItems }) => {
+const Cart = ({ cartItems = [], setCartItems }) => {
   const navigate = useNavigate();
 
-  // Calculate total price
+  // Calculate total price safely
   const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
     0
   );
 
   // Handle order confirmation
   const handleOrder = () => {
-    if (cartItems.length === 0) {
+    if (!cartItems || cartItems.length === 0) {
       alert("Your cart is empty!");
       return;
     }
@@ -25,13 +25,13 @@ const Cart = ({ cartItems, setCartItems }) => {
       token: Math.floor(1000 + Math.random() * 9000), // random 4-digit token
     };
 
-    // Save order details to localStorage for OrderSummary page
+    // Save order details to localStorage
     localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
 
-    // Clear cart after order
+    // Clear cart after placing the order
     setCartItems([]);
 
-    // Redirect to Order Summary page
+    // Redirect to order summary
     navigate("/order-summary");
   };
 
@@ -39,7 +39,7 @@ const Cart = ({ cartItems, setCartItems }) => {
     <div className="cart-container">
       <h2>Your Cart</h2>
 
-      {cartItems.length === 0 ? (
+      {(!cartItems || cartItems.length === 0) ? (
         <p>Your cart is empty. Add some items!</p>
       ) : (
         <>
@@ -56,9 +56,41 @@ const Cart = ({ cartItems, setCartItems }) => {
 
           <h3>Total: ₹{totalPrice}</h3>
 
-          <button className="order-btn" onClick={handleOrder}>
-            Order
-          </button>
+          <div className="cart-buttons">
+            <button
+              className="order-btn"
+              onClick={handleOrder}
+              style={{
+                backgroundColor: "green",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                padding: "10px 20px",
+                cursor: "pointer",
+                fontSize: "16px",
+                fontWeight: "bold",
+              }}
+            >
+              Place Order
+            </button>
+
+            <button
+              className="back-btn"
+              onClick={() => navigate("/menu")}
+              style={{
+                backgroundColor: "orange",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                padding: "10px 20px",
+                cursor: "pointer",
+                fontSize: "16px",
+                fontWeight: "bold",
+              }}
+            >
+              Back to Menu
+            </button>
+          </div>
         </>
       )}
     </div>
