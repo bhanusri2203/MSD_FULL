@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import "./Menu.css";
 import { useNavigate } from "react-router-dom";
+import soupImg from "../assets/images/soups.jpg";
+import starterImg from "../assets/images/starters.jpg";
+import mainImg from "../assets/images/maincourse.jpg";
+import dessertImg from "../assets/images/desserts.jpg";
+import drinkImg from "../assets/images/drinks.jpg";
+
 
 const Menu = ({ cartItems, setCartItems }) => {
   const navigate = useNavigate();
 
-  const categories = [
-    { id: 1, name: "Soups" },
-    { id: 2, name: "Starters" },
-    { id: 3, name: "Main Course" },
-    { id: 4, name: "Desserts" },
-    { id: 5, name: "Drinks" },
-  ];
+ const categories = [
+  { id: 1, name: "Soups", image: soupImg },
+  { id: 2, name: "Starters", image: starterImg },
+  { id: 3, name: "Main Course", image: mainImg },
+  { id: 4, name: "Desserts", image: dessertImg },
+  { id: 5, name: "Drinks", image: drinkImg },
+];
 
   const menuItems = {
     Soups: [
