@@ -26,7 +26,7 @@ const OrderSummary = () => {
           return;
         }
 
-        const response = await fetch("http://localhost:5000/api/order", {
+        const response = await fetch("https://msd-full.onrender.com/api/order", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
