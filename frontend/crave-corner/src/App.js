@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
@@ -7,14 +7,26 @@ import Home from "./components/Home";
 import Menu from "./components/Menu";
 import Cart from "./components/Cart";
 import OrderSummary from "./components/OrderSummary";
+import Help from "./components/Help";
+import About from "./components/About";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
+  // Update login state when token changes
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem("token"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   return (
     <Router>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
@@ -53,9 +65,26 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/help"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <Help />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <About />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* Redirect anything else to login */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        {/* Default Redirects */}
+        <Route path="/" element={<Navigate to={isLoggedIn ? "/home" : "/login"} replace />} />
+        <Route path="*" element={<Navigate to={isLoggedIn ? "/home" : "/login"} replace />} />
       </Routes>
     </Router>
   );
