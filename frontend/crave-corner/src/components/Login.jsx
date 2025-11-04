@@ -11,9 +11,9 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
 
     try {
-      // ✅ Use environment variable or fallback to localhost
+      // ✅ Correct backend URL
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL || "https://msd-full.onrender.com/"}/api/login`,
+        `${process.env.REACT_APP_API_URL || "https://msd-full-stack.onrender.com"}/api/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
