@@ -18,7 +18,7 @@ const Signup = () => {
     try {
       // ✅ Use environment variable or fallback to localhost
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/signup`,
+        `${process.env.REACT_APP_API_URL || "https://msd-full.onrender.com/"}/api/signup`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
