@@ -14,25 +14,34 @@ import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
-  // Update login state when token changes
+  // ✅ Listen for storage changes (login/logout from other tabs)
   useEffect(() => {
     const handleStorageChange = () => {
       setIsLoggedIn(!!localStorage.getItem("token"));
     };
-
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   return (
     <Router>
+      {/* ✅ Navbar updates dynamically */}
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/signup" element={<Signup />} />
 
-        {/* Protected Routes */}
+      <Routes>
+        {/* ✅ Public Routes */}
+        <Route
+          path="/login"
+          element={
+            isLoggedIn ? <Navigate to="/home" replace /> : <Login setIsLoggedIn={setIsLoggedIn} />
+          }
+        />
+        <Route
+          path="/signup"
+          element={isLoggedIn ? <Navigate to="/home" replace /> : <Signup />}
+        />
+
+        {/* ✅ Protected Routes */}
         <Route
           path="/home"
           element={
@@ -82,9 +91,15 @@ function App() {
           }
         />
 
-        {/* Default Redirects */}
-        <Route path="/" element={<Navigate to={isLoggedIn ? "/home" : "/login"} replace />} />
-        <Route path="*" element={<Navigate to={isLoggedIn ? "/home" : "/login"} replace />} />
+        {/* ✅ Default Redirects */}
+        <Route
+          path="/"
+          element={<Navigate to={isLoggedIn ? "/home" : "/login"} replace />}
+        />
+        <Route
+          path="*"
+          element={<Navigate to={isLoggedIn ? "/home" : "/login"} replace />}
+        />
       </Routes>
     </Router>
   );
