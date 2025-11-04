@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Menu.css";
 import { useNavigate } from "react-router-dom";
 
-const Menu = () => {
+const Menu = ({ cartItems, setCartItems }) => {
   const navigate = useNavigate();
 
   const categories = [
@@ -96,14 +96,8 @@ const Menu = () => {
   };
 
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [cartItems, setCartItems] = useState(() => {
-    return JSON.parse(localStorage.getItem("cartItems")) || [];
-  });
 
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-
+  // ✅ Add to Cart - updates global state
   const addToCart = (item) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
     let updatedCart;
